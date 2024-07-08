@@ -33,8 +33,8 @@ export const createPaymentIntent = async (req, res) => {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}&selectedRestaurantId=${selectedRestaurantId}&orderId=${orderId}`,
-      cancel_url: "http://localhost:3000/cancel",
+      success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}&selectedRestaurantId=${selectedRestaurantId}&orderId=${orderId}`,
+      cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     });
 
     res.json({ id: session.id });
