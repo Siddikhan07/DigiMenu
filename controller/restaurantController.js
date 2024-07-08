@@ -2,7 +2,10 @@ import QRCode from 'qrcode';
 import RestaurantModel from '../models/restaurantModel.js';
 import mongoose from 'mongoose';
 import Stripe from 'stripe';
+import dotenv from "dotenv";
 
+
+dotenv.config();
 const stripe = new Stripe("sk_test_51PXdbsKsLOwdkUkUQHxmTPJod6qCZua6rnBHdGaozSEHD9BGX0GrKSm0BbxfP9ysGntCVWtfMpBoPJpWDWzsUgOr00NwiD7kAT");
 
 
@@ -149,7 +152,7 @@ export const generateQRCode = async (req, res) => {
     }
 
     // Create QR Code URL
-    const url = `${restaurantId}`;
+    const url = `${process.env.FRONTEND_URL}/${restaurantId}`;
     const qrCode = await QRCode.toDataURL(url);
 
     res.status(200).json({ qrCode });
